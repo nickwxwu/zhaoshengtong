@@ -102,7 +102,8 @@ Req :
 ```json
 {
 "question":"我要招生", //查询的问题，必填
-"from_user":"test"      //用户名或ID，非必填
+"from_user":"test",      //用户名或ID，非必填
+"max_answer_num":1 // 文档条数，非必填
 }
 ```
 
