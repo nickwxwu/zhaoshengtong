@@ -371,3 +371,54 @@ ResponseBody:
     }
 }
 ```
+### 图片库
+#### 1 拉取图片库图片列表
+
+|请求基本信息|描述|
+|-------------|-------------|
+|方法|POST|
+|请求URL| /v1/open/platform/picture-library/list?SdkAppID=xxxx&AppID=xxx&RoleSpace=xxx&uin=xxx|
+|header|Content-Type:application/json|
+
+RequestBody: 
+
+```json
+{
+  "Offset":0,  // 偏移量，非必填
+  "Limit":20, //都不填，则返回全量；非必填
+}
+```
+ResponseBody:
+
+请求成功:
+```json
+{
+   "Response": {
+      "dataList": [{ //图片列表
+         "ID": 10001,//主键ID
+         "CreateTime": 1597048181,//创建时间
+         "UpdateTime": 1597048181,//修改时间
+         "Name": "timg (1)",//图片名称
+         "CosUrl": "https://zst-enroll-class-dev-1258344699.cos.ap-guangzhou.myqcloud.com/enroll-class%2F11133%2F20200810_170949_1597050550355.jpeg",//cos图片url
+         "Url": "https://p.qpic.cn/qidian_pic/2885785003/202008076ef7ad896694264d252e88209661c443/0",//企点图片url
+         "MediaId": "0fc43bdcbac9f8dff8a2ffd92426663d" //图片在企点中的id
+      }],
+      "TotalCount":18,//总条数
+      "TraceId": "30f0a41bb133ede6",
+      "RequestId": "30f0a41bb133ede6"
+   }
+}
+```
+请求失败(判断是否有 "Error" 字段) 示例：
+```json
+{
+  "Response": {
+    "Error": {
+      "Code": "FailedOperation",
+      "Message": "failed operation"
+    },
+    "RequestId": ""
+  }
+}
+```
+
