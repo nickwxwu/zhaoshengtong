@@ -422,3 +422,46 @@ ResponseBody:
 }
 ```
 
+### 数据上报
+#### 1 数据上报接口
+
+|请求基本信息|描述|
+|-------------|-------------|
+|方法|POST|
+|请求URL| /v1/open/platform/datareport/add?SdkAppID=xxxx&AppID=xxx&RoleSpace=xxx&uin=xxx|
+|header|Content-Type:application/json|
+
+RequestBody: 
+
+```json
+{
+   "Date":"20200816",  //上报数据日期 "YYYYmmdd"格式
+   "Tag":"test",       //上报数据tag
+   "Period":"daily",   //上报数据统计周期，值为"daily","week","month"其中之一
+   "Data":{            //上报数据，自定义json格式
+      "data1":1,
+      "data2":1
+   }
+}
+```
+ResponseBody:
+
+请求成功:
+```json
+{
+   "Response": {
+   }
+}
+```
+请求失败(判断是否有 "Error" 字段) 示例：
+```json
+{
+  "Response": {
+    "Error": {
+      "Code": "FailedOperation",
+      "Message": "failed operation"
+    },
+    "RequestId": ""
+  }
+}
+```
