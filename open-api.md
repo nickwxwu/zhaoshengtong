@@ -465,3 +465,143 @@ ResponseBody:
   }
 }
 ```
+### 视频专辑
+#### 1 视频专辑列表
+
+|请求基本信息|描述|
+|-------------|-------------|
+|方法|POST|
+|请求URL| /v1/open/platform/album/list?SdkAppID=xxxx&AppID=xxx&RoleSpace=xxx&uin=xxx|
+|header|Content-Type:application/json|
+
+RequestBody: 
+
+```json
+{
+  "Offset":0,
+  "Limit":20 // 默认20
+}
+```
+ResponseBody:
+
+请求成功:
+```json
+{
+    "Response": {
+        "Total": 1,
+        "AlSet": [
+            {
+                "Id": "933c1c7d-e02e-430d-a3c7-2112d7c2feeb",
+                "Name": "专辑测试",
+                "AlNum": 2,  //专辑内视频个数
+                "UpdateAt": 1602730589,
+                "ShareUrl": "https://zstdev.qq.com/qiwei/live.html?SchoolID=11133&ClassID=05335d95-be12-4ec6-98e2-0d472cd77762",  //专辑H5分享链接
+                "QRUrl": "https://zst-enroll-class-dev-1258344699.cos.ap-guangzhou.myqcloud.com/enroll-class%2F11133%2Fqr_11133_05335d95-be12-4ec6-98e2-0d472cd77762.jpg?sign=q-sign-algorithm%3Dsha1%26q-ak%3DAKIDPfkrqFrZRBl8JPNnFVdaEi5HKBpL5sPl%26q-sign-time%3D1598338060%3B1598338420%26q-key-time%3D1598338060%3B1598338420%26q-header-list%3D%26q-url-param-list%3D%26q-signature%3D38b7f551de5f16cc0a9089c61745eca1cae1a859",  //专辑小程序分享二维码
+                "MiniAppId": "wx56f35d0bd34f7d67",  //小程序APPID
+                "MiniUrl": "pages/album/album?id=60887539-41ec-4e7d-a564-f79b0f83dce8", //专辑小程序路径
+            }
+        ],
+        "TraceId": "4c0b97a6a715ef4",
+        "RequestId": "4c0b97a6a715ef4"
+    }
+}
+```
+请求失败(判断是否有 "Error" 字段) 示例：
+```json
+{
+  "Response": {
+    "Error": {
+      "Code": "FailedOperation",
+      "Message": "failed operation"
+    },
+    "RequestId": ""
+  }
+}
+```
+
+#### 2 视频专辑详情
+
+|请求基本信息|描述|
+|-------------|-------------|
+|方法|POST|
+|请求URL| /v1/open/platform/album/info?SdkAppID=xxxx&AppID=xxx&RoleSpace=xxx&uin=xxx|
+|header|Content-Type:application/json|
+
+RequestBody: 
+
+```json
+{
+  "Id": "933c1c7d-e02e-430d-a3c7-2112d7c2feeb" //专辑ID
+}
+```
+ResponseBody:
+
+请求成功:
+```json
+{
+    "Response": {
+        "Id": "933c1c7d-e02e-430d-a3c7-2112d7c2feeb",
+        "Name": "专辑测试",
+        "Intro": "专辑简介",
+        "Cover": "封面",
+        "Albums": [
+            "933c1c7d-e02e-430d-a3c7-2112d7c2feeb"
+        ],
+        "SchoolName": "开发大学1",
+        "SchoolLogo": "",  //学校LOGO地址
+        "ShareUrl": "https://zstdev.qq.com/qiwei/live.html?SchoolID=11133&ClassID=05335d95-be12-4ec6-98e2-0d472cd77762",  //专辑H5分享链接
+        "QRUrl": "https://zst-enroll-class-dev-1258344699.cos.ap-guangzhou.myqcloud.com/enroll-class%2F11133%2Fqr_11133_05335d95-be12-4ec6-98e2-0d472cd77762.jpg?sign=q-sign-algorithm%3Dsha1%26q-ak%3DAKIDPfkrqFrZRBl8JPNnFVdaEi5HKBpL5sPl%26q-sign-time%3D1598338060%3B1598338420%26q-key-time%3D1598338060%3B1598338420%26q-header-list%3D%26q-url-param-list%3D%26q-signature%3D38b7f551de5f16cc0a9089c61745eca1cae1a859", //专辑小程序分享二维码
+        "MiniAppId": "wx56f35d0bd34f7d67", //小程序APPID
+        "MiniUrl": "pages/album/album?id=60887539-41ec-4e7d-a564-f79b0f83dce8", //专辑小程序路径
+        "EnrollSet": [
+            {
+                "ClassID": "df7d20cf-0851-460f-856e-ab46a4b8b854",
+                "SchoolID": "11133",
+                "SchoolLogo": "http://", // 学校logo地址
+                "ClassName": "test",  //课名
+                "StartTime": 1597299600,  //开课时间
+                "EndTime": 1597299900, //结课时间
+                "ClassIntro": "test", //课程介绍
+                "ImageURL": "https://zst-enroll-class-dev-1258344699.cos.ap-guangzhou.myqcloud.com/enroll-class%2F11133%2F20200813_141237_1597299115266.jpeg",
+                "TeacherID": "adairyan",
+                "TeacherName": "adairyan", //宣讲人名称
+                "TeacherTitle": "test", //宣讲人职称
+                "ContactTeacherVisible": true,
+                "ContactTeacherName": "",
+                "ContactTeacherOpenID": "51B2252AA5E3ACEBE938DA97A337919B",
+                "ContactTeacherQYWXID": "nickxuewu",
+                "ContaceQQ": "",
+                "ContactQYWX": "https://wework.qpic.cn/wwpic/788655_ad06b3FFSamVp1__1596188592/0",
+                "ContactMiniProgram": "",
+                "ShareURL": "https://zstdev.qq.com/qiwei/live.html?SchoolID=11133\u0026ClassID=df7d20cf-0851-460f-856e-ab46a4b8b854", //H5课堂链接
+                "MiniProgram": "https://zst-enroll-class-dev-1258344699.cos.ap-guangzhou.myqcloud.com/enroll-class%2F11133%2Fqr_11133_df7d20cf-0851-460f-856e-ab46a4b8b854.jpg?sign=q-sign-algorithm%3Dsha1%26q-ak%3DAKIDPfkrqFrZRBl8JPNnFVdaEi5HKBpL5sPl%26q-sign-time%3D1597299199%3B1597299559%26q-key-time%3D1597299199%3B1597299559%26q-header-list%3D%26q-url-param-list%3D%26q-signature%3Dac8ada4bd53985bb63f0faefdb36c0a0b7db8cd1",  //小程序地址二维码
+                "StreamId": 100001, //导播台ID
+                "StreamName": "导播台名称",
+                "StreamURL": "导播台地址",        
+                "LiveID": "1000237952",
+                "PlayBackFlag": 0,  //是否支持回放标识，0-不支持，1-支持
+                "PlayBackUrl": "",  // 回放地址
+                "PlayBackMsg": "",  // 回放录制结果信息
+                "Flag": 0,
+                "PushRemindFlag": 1,
+                "LiveURL": "rtmp://29734.liveplay.myqcloud.com/live/1400313729_1000237952_adairyan_aux.flv?txSecret=b62b6d267e1995260bd45158e1f54c6f\u0026txTime=5F34DCBC", // 直播地址
+                "State": 0  // 直播状态，-1-直播已结束 0-未开始 1-直播中 2-直播延迟
+            }
+        ],
+        "TraceId": "3f18f06a8fa0694c",
+        "RequestId": "3f18f06a8fa0694c"
+    }
+}
+```
+请求失败(判断是否有 "Error" 字段) 示例：
+```json
+{
+  "Response": {
+    "Error": {
+      "Code": "FailedOperation",
+      "Message": "failed operation"
+    },
+    "RequestId": ""
+  }
+}
+```
