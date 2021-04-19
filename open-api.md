@@ -1,3 +1,5 @@
+[TOC]
+
 ## 招生通-腾讯云API网关接入说明
 
 ### 环境定义
@@ -720,5 +722,374 @@ ResponseBody:
     },
     "RequestId": ""
   }
+}
+```
+
+### 智招接口
+#### 1 查询当前学校的日报列表
+|请求基本信息|描述|
+|-------------|-------------|
+|方法|POST|
+|请求URL| /v1/open/platform/daily-paper/describe-school-topic?SdkAppID=xxxx&AppID=xxx&RoleSpace=xxx&uin=xxx|
+|header|Content-Type:application/json|
+
+RequestBody: 
+```json
+{
+   "PStatus": -1,// 上架状态， 1-上架，0-下架，-1-全部
+   "Fuzzy": "开发", // 标题和简介的模糊查询数据
+   "Limit": 10,
+   "Offset":0
+}
+```
+
+ResponseBody:
+
+请求成功:
+```json
+{
+    "Response": {
+        "TotalCount": 13,
+        "Topics": [ // 主题列表
+            {
+                "ID": 10000, //主题ID
+                "Name": "2020.1.11", // 主题名称
+                "Title": "biaoti",// 主题标题
+                "Desc": "描述", //描述
+                "LimitType": "1",// 院校限制类型
+                "Img": "iimage",// 图片
+                "PStatus": 1, // 上架状态 1-上架，0-下架
+                "Ctime": 1606725737, // 更新时间
+                "Mtime": 1606725737, // 创建时间
+                "CreateId": "kevenzchen", //创建人
+                "ModifyId": "", //修改人
+                "ArticleCount": 2 //资讯文章数
+            },
+        ]
+    }
+}
+```
+请求失败(判断是否有 "Error" 字段) 示例：
+```json
+{
+    "Response": {
+        "Error": {
+          "Code": "FailedOperation",
+          "Message": "failed operation"
+        },
+        "RequestId": ""
+    }
+}
+```
+
+#### 2 查询当前学校的日报的学校资讯列表
+|请求基本信息|描述|
+|-------------|-------------|
+|方法|POST|
+|请求URL| /v1/open/platform/daily-paper/describe-school-article?SdkAppID=xxxx&AppID=xxx&RoleSpace=xxx&uin=xxx|
+|header|Content-Type:application/json|
+
+RequestBody: 
+```json
+{
+    "TopicID":10000 // 日报ID
+}
+```
+
+ResponseBody:
+
+请求成功:
+```json
+{
+    "Response": {
+        "TotalPage": 0,
+        "TotalCount": 3,
+        "Articles": [
+            {
+                "ID": 10002, //资讯ID
+               "TopicID": 10000, // 主题ID
+               "Sort": 1, // 排序值
+                "CType": "1",// 类型 1-素材图文，2-微信图文，3-直播
+                "CValue": "f4597042-6fc1-4da5-878b-cbfda078758c",// 对应图文的ID、微信的链接、直播的ID
+                "Tag": "", // tag暂不适用
+                "Ctime": 1606810478, // 创建时间
+                "Mtime": 1606810478, // 修改时间
+                "CreateId": "kevenzchen", // 创建人
+                "ModifyId": ""  // 修改人
+                "SchoolID": "11133",
+                "Video": null, // 直播信息
+                "PictureLib": { // 图文信息
+                    "Title": "ad测试" // 图文标题
+                },
+                "WxArticle": null
+            },
+            {
+                "ID": 10003,
+                "TopicID": 10000,
+                "Sort": 2,
+                "CType": "2",
+                "CValue": "https://mp.weixin.qq.com/s?__biz=MzA3NDcyMTQyNQ==&mid=2649265641&idx=1&sn=22a514967de1ec35a3317be6b367df4a&chksm=87674417b010cd015cd1a97a67e1d7eb732e4013a5c6c1adba5efdada2c85b0cbc30e1bc18a2&xtrack=1&scene=90&subscene=93&sessionid=1606961496&clicktime=1606961498&enterid=1606961498&ascene=56&devicetype=android-29&version=2700143f&nettype=WIFI&abtest_cookie=AAACAA%3D%3D&lang=zh_CN&exportkey=AdHmfzgbx9776MoJaQpHek4%3D&pass_ticket=Lb3N2nlGZ5R7ih7LPgOLX0lw9ySJpS8qO%2BBFpYfVsPc2lkR3wZyy4NfxxO7OR%2BRe&wx_header=1",
+                "Tag": "-1",
+                "Ctime": 1606811115,
+                "Mtime": 1606966189,
+                "CreateId": "kevenzchen",
+                "ModifyId": "",
+                "SchoolID": "11133",
+                "Video": null,
+                "PictureLib": null,
+                "WxArticle": { // 微信文章信息
+                    "Url": "https://mp.weixin.qq.com/s?__biz=MzA3NDcyMTQyNQ==&mid=2649265641&idx=1&sn=22a514967de1ec35a3317be6b367df4a&chksm=87674417b010cd015cd1a97a67e1d7eb732e4013a5c6c1adba5efdada2c85b0cbc30e1bc18a2&xtrack=1&scene=90&subscene=93&sessionid=1606961496&clicktime=1606961498&enterid=1606961498&ascene=56&devicetype=android-29&version=2700143f&nettype=WIFI&abtest_cookie=AAACAA%3D%3D&lang=zh_CN&exportkey=AdHmfzgbx9776MoJaQpHek4%3D&pass_ticket=Lb3N2nlGZ5R7ih7LPgOLX0lw9ySJpS8qO%2BBFpYfVsPc2lkR3wZyy4NfxxO7OR%2BRe&wx_header=1",//微信链接
+                    "ImageURL": "https://mmbiz.qpic.cn/mmbiz_png/YE1dmj1Pw7kAthIDChZZXXj1n7WJQZ409ichZdUgdYOZwh18uNQ3Potolv2jv6PhcGwleVI9BFwRGEs9Thplurw/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1",//图片
+                    "Title": "testTitle",//标题
+                    "Desc": "testDesc" // 简介
+                }
+            },
+            {
+                "ID": 10004,
+                "TopicID": 10000,
+                "Sort": 2,
+                "CType": "3",
+                "CValue": "e73b2907-73d4-4531-9451-e1114f0a5eea",
+                "Tag": "-1",
+                "Ctime": 1606965879,
+                "Mtime": 1606966189,
+                "CreateId": "kevenzchen",
+                "ModifyId": "",
+                "SchoolID": "11133",
+                "Video": {// 视频信息
+                    "ImageURL": "https://zst-enroll-class-dev-1258344699.cos.ap-guangzhou.myqcloud.com/enroll-class%2F11133%2F20201116_151055_1605510655418.jpeg",//图片
+                    "ClassName": "宣讲来啦",//视频名称
+                    "ClassIntro": "嘻嘻嘻嘻嘻",// 简介
+                    "TeacherName": "kevenzchen",// 老师
+                    "TeacherID": "kevenzchen",// 老师ID
+                    "StartTime": 1605510900, // 开播时间
+                    "EndTime": 1605510900, // 直播结束时间
+                    "RealStartTime": 0 // 真实开播时间
+                },
+                "PictureLib": null,
+                "WxArticle": null
+            }
+        ],
+        "TraceId": "32ecb8d637f36c29",
+        "RequestId": "32ecb8d637f36c29"
+    }
+}
+```
+请求失败(判断是否有 "Error" 字段) 示例：
+```json
+{
+    "Response": {
+        "Error": {
+          "Code": "FailedOperation",
+          "Message": "failed operation"
+        },
+        "RequestId": ""
+    }
+}
+```
+
+### 接待接口
+#### 1 获取加入的小组信息
+|请求基本信息|描述|
+|-------------|-------------|
+|方法|POST|
+|请求URL| /v1/open/platform/member/describe-related-team?SdkAppID=xxxx&AppID=xxx&RoleSpace=xxx&uin=xxx|
+|header|Content-Type:application/json|
+
+RequestBody: 
+```json
+{
+  "UinSet": [
+    "uin1",
+    "uin2"
+  ]
+}
+```
+
+ResponseBody:
+
+请求成功:
+```json
+{
+  "Response": {
+    "ResultSet": [
+       {
+          "Uin": "uin1",
+          "RelatedTeamSet": [
+            {
+              "TeamID": "1000",
+              "TeamName": "汕头招生组"
+            }
+          ]
+       },
+       {
+          "Uin": "uin2",
+          "RelatedTeamSet": [
+            {
+              "TeamID": "1000",
+              "TeamName": "汕头招生组"
+            }
+          ]
+       }
+    ],
+    "TraceId": "688e1c8e2cc7a98b",
+    "RequestId": "688e1c8e2cc7a98b"
+  }
+}
+```
+请求失败(判断是否有 "Error" 字段) 示例：
+```json
+{
+    "Response": {
+        "Error": {
+          "Code": "FailedOperation",
+          "Message": "failed operation"
+        },
+        "RequestId": ""
+    }
+}
+```
+
+#### 2 获取小组信息
+|请求基本信息|描述|
+|-------------|-------------|
+|方法|POST|
+|请求URL| /v1/open/platform/member/describe-teams?SdkAppID=xxxx&AppID=xxx&RoleSpace=xxx&uin=xxx|
+|header|Content-Type:application/json|
+
+RequestBody: 
+```json
+{
+  "Filters": [{
+        "Name": "TeamID",
+        "Values": ["1000"],
+     }
+  ],
+  "Offset": 0,
+  "Limit": 15
+}
+```
+
+ResponseBody:
+
+请求成功:
+```json
+{
+  "Response": {
+    "Count": 10,
+    "TeamSet": [
+      {
+        "TeamID": "1000",
+        "TeamName": "汕头招生组",
+        "MemberCount": 2,
+        "QRCode": "xxxx",
+        "GroupWpaID": 617,
+        "GroupQr": "https://p.qpic.cn/qidian_pic/0/20210112c7467f45dd4e917b5715f6c9c70ac4fd/0",  //QQ群接待二维码
+        "GroupUrl": "https://wpa1.qq.com/SqXP909E?_type=wpa&qidian=true",  //QQ群接待url
+        "GroupName": "测试接待",  //QQ群名称
+        "GroupNumber": "589066866",  // QQ群号
+        "GroupFace": "http://p.qlogo.cn/gh/589066866/589066866/",
+        "CreateTime": 1233333333333,
+        "ModifyTime": 1233333333333,
+        "MemberSet": [
+          {
+            "Uin": "uin1",
+            "UserID": "UserID1"
+          },
+          {
+            "Uin": "uin2",
+            "UserID": "UserID2"
+          }
+        ],
+        "TotalCustomer": 100
+      }
+    ],
+    "TraceId": "688e1c8e2cc7a98b",
+    "RequestId": "688e1c8e2cc7a98b"
+  }
+}
+```
+请求失败(判断是否有 "Error" 字段) 示例：
+```json
+{
+    "Response": {
+        "Error": {
+          "Code": "FailedOperation",
+          "Message": "failed operation"
+        },
+        "RequestId": ""
+    }
+}
+```
+
+#### 3 下载联系二维码
+|请求基本信息|描述|
+|-------------|-------------|
+|方法|GET|
+|请求URL| /v1/open/platform/qywx/get-qr-code?config_id=42b34949e138eb6e027c123cba77fad7&SdkAppID=xxxx&AppID=xxx&RoleSpace=xxx&uin=xxx|
+|header|Content-Type:application/octet-stream|
+
+
+ResponseBody:
+二维码图片内容
+
+
+#### 4 搜索联系我
+|请求基本信息|描述|
+|-------------|-------------|
+|方法|GET|
+|请求URL| /v1/open/platform/qywx/search-contact-way?SdkAppID=xxxx&AppID=xxx&RoleSpace=xxx&uin=xxx|
+|header|Content-Type:application/json|
+
+
+RequestBody: 
+```json
+{
+  "UserID":"nick",
+  "Flag":1 // 1--企业微信小程序按钮；0--所有
+}
+```
+
+ResponseBody:
+
+请求成功:
+```json
+{
+  "Response": {
+    "contact_way_list": [
+      {
+        "contact_name":"组件名称", // 组件名称
+        "config_id":"42b34949e138eb6e027c123cba77fad7",
+        "type":1,
+        "scene":1,
+        "style":2,
+        "remark":"test remark",
+        "skip_verify":true,
+        "state": {
+            "ID": "10001",
+            "Name": "东东",
+            "Owner": "dd",
+            "Phone": "1221312312321"
+        },
+        "qr_code":"http://p.qpic.cn/wwhead/duc2TvpEgSdicZ9RrdUtBkv2UiaA/0",
+        "user":[{
+           "Name": "xxxx", // 姓名
+           "UserID": "xxxx", // 企业微信userid
+        }]
+     }
+    ]
+  }
+}
+```
+请求失败(判断是否有 "Error" 字段) 示例：
+```json
+{
+    "Response": {
+        "Error": {
+          "Code": "FailedOperation",
+          "Message": "failed operation"
+        },
+        "RequestId": ""
+    }
 }
 ```
