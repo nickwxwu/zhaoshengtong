@@ -1022,8 +1022,53 @@ ResponseBody:
 }
 ```
 
+#### 3 获取全部小组(名称列表)
+|请求基本信息|描述|
+|-------------|-------------|
+|方法|POST|
+|请求URL| /v1/open/platform/member/describe-all-teams?SdkAppID=xxxx&AppID=xxx&RoleSpace=xxx&uin=xxx|
+|header|Content-Type:application/json|
 
-#### 3 搜索联系我
+RequestBody: 
+```json
+{
+}
+```
+
+ResponseBody:
+
+请求成功:
+```json
+{
+  "Response": {
+    "Count": 10,
+    "TeamSet": [
+      {
+        "TeamID": "1000",
+        "TeamName": "汕头招生组",
+      }
+    ],
+    "TraceId": "688e1c8e2cc7a98b",
+    "RequestId": "688e1c8e2cc7a98b"
+  }
+}
+```
+请求失败(判断是否有 "Error" 字段) 示例：
+```json
+{
+    "Response": {
+        "Error": {
+          "Code": "FailedOperation",
+          "Message": "failed operation"
+        },
+        "RequestId": ""
+    }
+}
+```
+
+
+
+#### 4 搜索联系我
 |请求基本信息|描述|
 |-------------|-------------|
 |方法|GET|
