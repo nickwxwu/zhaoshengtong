@@ -1022,19 +1022,8 @@ ResponseBody:
 }
 ```
 
-#### 3 下载联系二维码
-|请求基本信息|描述|
-|-------------|-------------|
-|方法|GET|
-|请求URL| /v1/open/platform/qywx/get-qr-code?config_id=42b34949e138eb6e027c123cba77fad7&SdkAppID=xxxx&AppID=xxx&RoleSpace=xxx&uin=xxx|
-|header|Content-Type:application/octet-stream|
 
-
-ResponseBody:
-二维码图片内容
-
-
-#### 4 搜索联系我
+#### 3 搜索联系我
 |请求基本信息|描述|
 |-------------|-------------|
 |方法|GET|
