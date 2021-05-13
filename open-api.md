@@ -88,7 +88,7 @@ ResponseBody:
 }
 ```
 
-### 2.机器客服 
+### 2.机器客服 (已废弃)
 |请求基本信息|描述|
 |-------------|-------------|
 |方法|POST|
@@ -136,7 +136,58 @@ ResponseBody:
     }
 }
 ```
-### 3.拉取联系我列表
+
+### 3.机器客服 
+|请求基本信息|描述|
+|-------------|-------------|
+|方法|POST|
+|请求URL| /v1/open/platform/qidian/robot-ask?SdkAppID=xxxx&AppID=xxx&RoleSpace=xxx&uin=xxx&username=xxx|
+|header|Content-Type:application/json|
+
+Req :
+
+```json
+{
+"question":"我要招生", //查询的问题，必填
+"from_user":"test",   //用户名或ID，非必填
+"max_answer_num": 3   //最多返回个数
+}
+```
+
+ResponseBody:
+
+请求成功:
+```json
+{
+   "Response":{
+      "data":{
+         "result":[
+            {
+               "type":1,
+               "qaid":3,
+               "question":"我要招生",
+               "answer":"好的，干了这一杯再说"
+            }
+         ]
+      },
+      "RequestId":""
+   }
+}
+```
+请求失败(判断是否有 "Error" 字段) 示例：
+```json
+{
+    "Response": {
+        "Error": {
+            "Code": "ParamInvalid",
+            "Message": "table not exist"
+        },
+        "RequestId": ""
+    }
+}
+```
+
+### 4.拉取联系我列表
 |请求基本信息|描述|
 |-------------|-------------|
 |方法|POST|
