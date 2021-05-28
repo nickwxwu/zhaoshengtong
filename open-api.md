@@ -187,7 +187,7 @@ ResponseBody:
 }
 ```
 
-### 4.拉取联系我列表
+### 4.拉取接待码列表
 |请求基本信息|描述|
 |-------------|-------------|
 |方法|POST|
@@ -212,25 +212,66 @@ ResponseBody:
 ```json
 {
   "Response": {
-    "contact_way_list": [
+    "ContactWayList": [
       {
-        "config_id":"42b34949e138eb6e027c123cba77fad7",
-        "type":1,
-        "scene":1,
-        "style":2,
-        "remark":"test remark",
-        "skip_verify":true,
-        "state": {
-            "ID": "10001",
-            "Name": "东东",
-            "Owner": "dd",
-            "Phone": "1221312312321"
-        },
-        "qr_code":"http://p.qpic.cn/wwhead/duc2TvpEgSdicZ9RrdUtBkv2UiaA/0",
-        "user":[{
-           "Name": "xxxx", // 姓名
-           "UserID": "xxxx", // 企业微信userid
-        }]
+             "ContactName":"组件名称", // 组件名称
+             "ConfigID":"adfasdfadsfadf", 
+             "Type" :1,
+             "Scene":1,
+             "Style":1,
+             "Remark":"渠道客户",
+             "SkipVerify":true,
+             "State":"teststate",
+             "Source": {
+                  "ID": "10001",
+                  "Name": "东东",
+                  "Owner": "dd",
+                  "Phone": "1221312312321"
+              },
+             "user":[{
+                "Name": "xxxx", // 姓名
+                "UserID": "xxxx", // 企业微信userid
+             }],
+             "Party" : ["PartyID1", "PartyID2"],
+             "ExType": 1, // 额外的二维码类型 1-页面码  默认 0 接待码
+             "UserInfos": [{"Uin": "uin", "Name": "name"}], // 与User中的数据保持一致，做数据冗余给联奕使用
+             "WebPage":{ // Type=1时，有效
+                "Title":"网页标题",
+                "Link":"网页链接"
+             },
+             "Image":{
+                "ImageURL":"http://p.qpic.cn/pic_wework/3474110808/7a6344sdadfwehe42060/0" //图片url,图片需要先调用上传结构得到图片url
+             },
+             "News":{
+               "Id":"图文id", 
+               "Title":"图文标题",
+               "Author":"我是作者",
+               "Remark":"我是摘要",
+               "ImageURL":"上传图片地址"
+             },
+             "Reserve": {
+                     "ReserveIds": [
+                         10001,
+                         10002
+                     ],
+                     "Title": "留资数据",
+                     "ReserveAnchor": 0 // 留资信息表是否停靠在企业微信侧边栏
+              },
+                "WType": 1, // 1 固定欢迎语  2 分时段欢迎语
+                "Date": ["周一", "周二", "周三", "周四", "周五", "周六", "周日"], // 星期数
+                "Begin": "9:30", // 发送开始时间
+                "End": "10:30" // 发送结束时间
+              }, // 欢迎语 Extype = 0时 必填
+             "PageCodes": [{  
+                "ID": 1212,
+                "ConfigID":"adfasdfadsfadf", 
+                "QrCode": "", // 二维码
+                "CodeGroupID": "", // 微信群id
+                "Guide": "", // 引导语
+                "QrLogo": "", // 活动标识-logo url
+                "Begin": 1212121212,
+                "End": 1231231 // 有效期结束时间
+            }] // 页面码数据 Extype = 1时 必填
       }
     ]
   }
