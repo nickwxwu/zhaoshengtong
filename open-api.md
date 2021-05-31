@@ -220,9 +220,9 @@ ResponseBody:
              "Scene":1,
              "Style":1,
              "Remark":"渠道客户",
-             "SkipVerify":true,
+             "SkipVerify":true,  //验证通过方式，true: 自动验证通过; false: 手动验证
              "State":"teststate",
-             "Source": {
+             "Source": {   //标签
                   "ID": "10001",
                   "Name": "东东",
                   "Owner": "dd",
