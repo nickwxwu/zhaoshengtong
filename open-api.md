@@ -220,9 +220,10 @@ ResponseBody:
              "Scene":1,
              "Style":1,
              "Remark":"渠道客户",
-             "SkipVerify":true,  //验证通过方式，true: 自动验证通过; false: 手动验证
+             "QrCode": "https://wework.qpic.cn/wwpic/288046_Tv_mwusBScuy85j_1622441909/0",
+             "SkipVerify":true, //验证通过方式，true: 自动验证通过; false: 手动验证
              "State":"teststate",
-             "Source": {   //标签
+             "Source": {
                   "ID": "10001",
                   "Name": "东东",
                   "Owner": "dd",
@@ -235,33 +236,27 @@ ResponseBody:
              "Party" : ["PartyID1", "PartyID2"],
              "ExType": 1, // 额外的二维码类型 1-页面码  默认 0 接待码
              "UserInfos": [{"Uin": "uin", "Name": "name"}], // 与User中的数据保持一致，做数据冗余给联奕使用
-             "WebPage":{ // Type=1时，有效
-                "Title":"网页标题",
-                "Link":"网页链接"
-             },
-             "Image":{
-                "ImageURL":"http://p.qpic.cn/pic_wework/3474110808/7a6344sdadfwehe42060/0" //图片url,图片需要先调用上传结构得到图片url
-             },
-             "News":{
-               "Id":"图文id", 
-               "Title":"图文标题",
-               "Author":"我是作者",
-               "Remark":"我是摘要",
-               "ImageURL":"上传图片地址"
-             },
-             "Reserve": {
-                     "ReserveIds": [
-                         10001,
-                         10002
-                     ],
+             "WelCome": {
+                "Type":1, // 欢迎语类型，0--文本;1--网页；2--图片；3--图文；4--信息采集
+                "Words": "欢迎语",// 欢迎语，必填
+                "Reserve": {
                      "Title": "留资数据",
-                     "ReserveAnchor": 0 // 留资信息表是否停靠在企业微信侧边栏
-              },
+                     "ReserveIds": [10001,10002] ,
+                     "ReserveAnchor" : 0 // 留资信息表是否停靠在企业微信侧边栏
+                },
+                "WebPage":{ // Type=1时，有效
+                   "Title":"网页标题",
+                   "Link":"网页链接"
+                },
+                "Image":{
+                   "ImageURL":"http://p.qpic.cn/pic_wework/3474110808/7a6344sdadfwehe42060/0" //图片url,图片需要先调用上传结构得到图片url
+                },
+                "NewsID":"图文id"
                 "WType": 1, // 1 固定欢迎语  2 分时段欢迎语
                 "Date": ["周一", "周二", "周三", "周四", "周五", "周六", "周日"], // 星期数
                 "Begin": "9:30", // 发送开始时间
                 "End": "10:30" // 发送结束时间
-              }, // 欢迎语 Extype = 0时 必填
+             }, // 欢迎语 Extype = 0时 必填
              "PageCodes": [{  
                 "ID": 1212,
                 "ConfigID":"adfasdfadsfadf", 
